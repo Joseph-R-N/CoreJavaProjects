@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class DragonCaveProject {
+
+    public static void main(String[] args){
+        int choice;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("You are in a land full of dragons. In front of you, you see two caves. In one cave, the dragon is friendly\n" +
+                "\n" +
+                "and will share his treasure with you. The other dragon is greedy and hungry and will eat you on sight.\n" +
+                "\n" +
+                "Which cave will you go into? (1 or 2)");
+        System.out.println("\n" + " Enter your choice either 1 or 2: ");
+        choice = sc.nextInt();
+        System.out.println("\n" + "\n");
+        System.out.println("You approach the cave...\n" +
+                "\n" +
+                "                    It is dark and spooky...");
+
+        DragonChoice(choice);
+
+
+    }
+
+    private static void DragonChoice(int choice) {
+        int random = getRandom();
+        if((choice == random)){
+            System.out.println("***********************");
+            System.out.println("*****************");
+            System.out.println("*************");
+            System.out.println("**********");
+            System.out.println("*******");
+            System.out.println("***");
+            System.out.println("*");
+            System.out.println("A large dragon jumps out in front of you! He opens his jaws and...\n" +
+                    "\n" +
+                    "                                                    Gobbles you down in one bite!");
+        } else {
+            System.out.println("***********************");
+            System.out.println("*****************");
+            System.out.println("*************");
+            System.out.println("**********");
+            System.out.println("*******");
+            System.out.println("***");
+            System.out.println("*");
+            System.out.println("A large dragon jumps out in front of you! He opens his jaws and...\n" +
+                    "\n" +
+                    "                                                    Welcome! I am your friend...");
+        }
+    }
+
+    private static int getRandom() {
+        double rand = Math.random()*3;
+        int random = (int) Math.round(rand);
+        if(random == 0){
+            random = 1;
+        }
+        else if(random > 2){
+            random = 2;
+        }
+        return random;
+    }
+}

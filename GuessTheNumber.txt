@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class GuessTheNumber {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Hello! What is your name: ");
+        String name = sc.nextLine();
+        int random = (int) (Math.random() * 20 + 1);
+        //System.out.println(random);
+        System.out.println("Well, " + name + " I am thinking of a number between 1 and 20" + "\n" + "Take a guess...");
+        int input = sc.nextInt();
+        GuessNumber(sc, name, random, input);
+    }
+
+    private static void GuessNumber(Scanner sc, String name, int random, int input) {
+        for (int i = 1; i <= 6; i++) {
+            if (input == random) {
+                System.out.println("Good job, " + name + " You guessed my number in " + i + " guesses!");
+                break;
+            } else if (input > random) {
+                System.out.println("Your guess is too high.\n" +
+                        "\n" + "Take a guess.");
+                input = sc.nextInt();
+            } else {
+                System.out.println("Your guess is too low.\n" +
+                        "\n" + "Take a guess.");
+                input = sc.nextInt();
+            }
+        }
+    }
+}

@@ -1,0 +1,142 @@
+import javax.swing.plaf.synth.SynthEditorPaneUI;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class HangManMethod{
+    public static int lives = 6;
+    public static String letter;
+
+
+    public static void main(String[] args) throws FileNotFoundException {
+        File hangman = new File("D:/hangman/word.txt");
+        Scanner sc = new Scanner(hangman);
+        Scanner scan = new Scanner(System.in);
+        List<String> words = new ArrayList<>();
+        List<Character> store = new ArrayList<>();
+        while(sc.hasNext()){ ;
+            int c = 0;
+            words.add(c,sc.nextLine());
+            c++;
+        }
+        int len = words.size();
+        int random = (int)((Math.random() * len) + 1);
+        String word = words.get(random);
+        int length = word.length();
+        int number = 0;
+        System.out.println("                ____              ");
+        System.out.println("|___|  /\\ |\\ | |  __  |\\/|  /\\ |\\ |");
+        System.out.println("|   | /  \\| \\| |____| |  | /  \\| \\|");
+        System.out.println("\n" + "Let's Play HangMan! Please Guess the " + length + " lettered word:");
+
+        List<Character> letters = new ArrayList<>();
+        for(int i=0; i<length; i++){
+            letters.add(i, word.charAt(i));
+        }
+        char[] str = new char[length];
+        for(int i=0; i<length; i++){
+            str[i] = word.charAt(i);
+        }
+        char[] output = new char[length];
+        for(int i=0; i<length; i++){
+            output[i] = '*';
+        }
+        System.out.println(output);
+        LetterCheck(scan, length, letters, str, output, number, store);
+
+    }
+
+    private static void LetterCheck(Scanner scan, int length, List<Character> letters, char[] str, char[] output, int number, List<Character> store) {
+        while(lives>=0) {
+            System.out.println("\n" + "Guess the Alphabet: ");
+            letter = scan.nextLine();
+            char w = letter.charAt(0);
+
+            if (letters.contains(w)) {
+                lettercapture(w, store);
+                System.out.println("\n" + "Yes! we have that letter in the word");
+                for (int i = 0; i < length; i++) {
+                    if (str[i] == w) {
+                        output[i] = w;
+                    }
+                }
+                System.out.println(output);
+                System.out.println("_________________________________________");
+                int check = 0;
+                for(int y=0; y<length; y++) {
+                    if (output[y] == '*') {
+                        check = check + 1;
+                    }
+                    number = check;
+                }
+                if(number == 0){
+                    System.out.println("Congratulations!!! you WON!");
+                    break;
+                }
+            } else {
+                System.out.println("Sorry! that is a wrong letter.");
+                lives = lives - 1;
+                hang(lives);
+                if (lives == 0) {
+                    System.out.println("GAME OVER!!!");
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void lettercapture(char w, List<Character> store){
+        if(store.contains(w)){
+            System.out.println("Hey! you have already entered this letter...");
+        }
+        int in = 0;
+        store.add(in,w);
+        in++;
+    }
+
+    public static void hang(int error) {
+        if (error == 5) {
+            System.out.println("-|-------|");
+            System.out.println(" o");
+            System.out.println();
+            System.out.println("_________________________________________");
+        } else if (error == 4) {
+            System.out.println("-|-------|");
+            System.out.println(" o");
+            System.out.println(" |");
+            System.out.println();
+            System.out.println("_________________________________________");
+        } else if (error == 3) {
+            System.out.println("-|-------|");
+            System.out.println(" o");
+            System.out.println("/|");
+            System.out.println();
+            System.out.println("_________________________________________");
+        } else if (error == 2) {
+            System.out.println("-|-------|");
+            System.out.println(" o");
+            System.out.println("/|\\");
+            System.out.println();
+            System.out.println("_________________________________________");
+        } else if (error == 1) {
+            System.out.println("-|-------|");
+            System.out.println(" o");
+            System.out.println("/|\\");
+            System.out.println("/");
+            System.out.println();
+            System.out.println("_________________________________________");
+        } else if (error == 0) {
+            System.out.println("-|-------|");
+            System.out.println(" o");
+            System.out.println("/|\\");
+            System.out.println("/ \\");
+            System.out.println();
+            System.out.println("_________________________________________");
+        }
+    }
+
+}
+
+
